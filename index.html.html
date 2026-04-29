@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Українські Мультиплікатори</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1008;
+    --paper: #f5ede0;
+    --gold: #c9973a;
+    --gold-light: #e8c878;
+    --terracotta: #b8522a;
+    --sage: #5a7a5e;
+    --cream: #fdf8f0;
+    --shadow: rgba(26,16,8,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ---- GRAIN OVERLAY ---- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 4rem 2rem;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,151,58,0.12) 0%, transparent 70%),
+      var(--paper);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-ornament {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+  }
+
+  .hero-ornament svg {
+    width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0;
+  }
+
+  .hero-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.4rem 1.2rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    color: #6b5840;
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .hero-divider span {
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-divider svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--gold);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    animation: fadeIn 1.5s ease 1.5s forwards;
+  }
+
+  .scroll-arrow {
+    width: 1px;
+    height: 40px;
+    background: var(--gold);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ---- SECTIONS ---- */
+  .section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .section-title-wrap h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .section-title-wrap p {
+    font-size: 0.95rem;
+    color: #8a7060;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  .section-rule {
+    height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-bottom: 3rem;
+  }
+
+  /* ---- GALLERY ---- */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 700px) {
+    .gallery { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .gallery-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--ink);
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery-card.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px var(--shadow);
+  }
+
+  .gallery-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: sepia(30%) contrast(1.05);
+  }
+
+  .gallery-card:hover img {
+    transform: scale(1.07);
+    filter: sepia(0%) contrast(1.1);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(26,16,8,0.9) 0%, transparent 60%);
+    padding: 1.5rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-card:hover .gallery-overlay {
+    transform: translateY(0);
+  }
+
+  .gallery-overlay .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+
+  .gallery-overlay .role {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+  }
+
+  .gallery-frame-top {
+    position: absolute;
+    top: 8px; left: 8px; right: 8px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.6;
+    z-index: 2;
+  }
+
+  .gallery-card > img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: sepia(25%) contrast(1.05);
+  }
+
+  .gallery-card:hover > img {
+    transform: scale(1.07);
+    filter: sepia(0%) contrast(1.1);
+  }
+
+  .photo-fallback {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ---- ANIMATED TEXT ---- */
+  .text-section { background: var(--cream); }
+
+  .text-blocks { display: grid; gap: 2rem; }
+
+  .text-block {
+    padding: 2rem 2.5rem;
+    border-left: 3px solid var(--gold);
+    background: white;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    box-shadow: 4px 4px 0 rgba(201,151,58,0.12);
+  }
+
+  .text-block.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .text-block-icon {
+    position: absolute;
+    top: -12px; right: 1.5rem;
+    background: var(--gold);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  .text-block p {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: #3a2d20;
+  }
+
+  .text-block p strong {
+    font-weight: 500;
+    color: var(--terracotta);
+  }
+
+  /* ---- MEDIA SECTION ---- */
+  .media-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .media-player {
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .media-player.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .media-player-header {
+    padding: 1rem 1.5rem;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .media-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .media-player-header span {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-left: 0.5rem;
+    font-weight: 300;
+  }
+
+  .media-player-body { padding: 1.5rem; }
+
+  .media-player-body audio,
+  .media-player-body video {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .media-player-body video {
+    background: #000;
+    max-height: 340px;
+  }
+
+  .media-note {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #8a7060;
+    font-style: italic;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  footer::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin-bottom: 2rem;
+  }
+
+  footer h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,151,58,0.4);
+    transition: border-color 0.2s;
+  }
+
+  footer a:hover { border-color: var(--gold); }
+
+  footer .footer-meta {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ---- DECORATIVE STRIPE ---- */
+  .stripe {
+    height: 6px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--gold) 0, var(--gold) 40px,
+      var(--terracotta) 40px, var(--terracotta) 80px,
+      var(--sage) 80px, var(--sage) 120px,
+      var(--paper) 120px, var(--paper) 160px
+    );
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ornament">
+    <svg viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="200" fill="none" stroke="#c9973a" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1340" cy="700" r="250" fill="none" stroke="#b8522a" stroke-width="0.5" opacity="0.25"/>
+      <line x1="0" y1="400" x2="1440" y2="400" stroke="#c9973a" stroke-width="0.3" opacity="0.15"/>
+      <line x1="720" y1="0" x2="720" y2="800" stroke="#c9973a" stroke-width="0.3" opacity="0.15"/>
+    </svg>
+  </div>
+
+  <div class="hero-tag">Мистецтво анімації</div>
+  <h1>Українські<br><em>Мультиплікатори</em></h1>
+  <p class="hero-subtitle">Видатні митці, що подарували нам цілий всесвіт казок, пригод та незабутніх образів</p>
+
+  <div class="hero-divider">
+    <span></span>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <span></span>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+    прокрути
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- GALLERY -->
+<div class="text-section" style="background: var(--paper)">
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title-wrap">
+      <h2>Майстри анімації</h2>
+      <p>Видатні постаті вітчизняного мистецтва</p>
+    </div>
+  </div>
+  <div class="section-rule"></div>
+
+  <div class="gallery" id="gallery">
+
+    <!-- Card 1: Давид Черкаський -->
+    <div class="gallery-card" style="transition-delay:0s">
+      <div class="gallery-frame-top"></div>
+      <img
+        src="cherkaskyi.png"
+        alt="Давид Черкаський"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      >
+      <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#3a2010,#7a5020);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
+        <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#c9973a" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#c9973a" opacity="0.4"/></svg>
+        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>cherkaskyi.jpg</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="name">Давид Черкаський</div>
+        <div class="role">Режисер, аніматор · 1931–2018</div>
+      </div>
+    </div>
+
+    <!-- Card 2: Іпполіт Лазарчук -->
+    <div class="gallery-card" style="transition-delay:0.1s">
+      <div class="gallery-frame-top"></div>
+      <img
+        src="lazarchuk.png"
+        alt="Іпполіт Лазарчук"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      >
+      <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#0a2010,#1a5030);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
+        <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#5a7a5e" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#5a7a5e" opacity="0.4"/></svg>
+        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>lazarchuk.jpg</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="name">Іпполіт Лазарчук</div>
+        <div class="role">Аніматор, художник · 1903–1979</div>
+      </div>
+    </div>
+
+    <!-- Card 3: Євген Сивокінь -->
+    <div class="gallery-card" style="transition-delay:0.2s">
+      <div class="gallery-frame-top"></div>
+      <img
+        src="syvokin.png"
+        alt="Євген Сивокінь"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      >
+      <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#2a0a05,#6a2015);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
+        <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#b8522a" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#b8522a" opacity="0.4"/></svg>
+        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>syvokin.jpg</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="name">Євген Сивокінь</div>
+        <div class="role">Режисер анімації · нар. 1935</div>
+      </div>
+    </div>
+
+    <!-- Card 4: Володимир Дахно -->
+    <div class="gallery-card" style="transition-delay:0.3s">
+      <div class="gallery-frame-top"></div>
+      <img
+        src="dakhno.png"
+        alt="Володимир Дахно"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      >
+      <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#0a0a20,#202060);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
+        <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#7070c0" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#7070c0" opacity="0.4"/></svg>
+        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>dakhno.jpg</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="name">Володимир Дахно</div>
+        <div class="role">Режисер · «Козаки» · 1932–2018</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="stripe" style="opacity:0.4"></div>
+
+<!-- TEXT / ANIMATED PARAGRAPHS -->
+<div class="text-section">
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title-wrap">
+      <h2>Про українську анімацію</h2>
+      <p>Кілька слів про цей дивовижний жанр</p>
+    </div>
+  </div>
+  <div class="section-rule"></div>
+
+  <div class="text-blocks" id="textBlocks">
+
+    <div class="text-block" style="transition-delay:0s">
+      <div class="text-block-icon">Витоки</div>
+      <p>Українська мультиплікація має <strong>багату та самобутню історію</strong>, що сягає корінням у середину XX століття. Київська студія «Київнауфільм» стала справжньою колискою вітчизняної анімації. Саме тут народжувалися яскраві персонажі та незабутні сюжети, що захоплювали глядачів різних поколінь.</p>
+    </div>
+
+    <div class="text-block" style="transition-delay:0.15s">
+      <div class="text-block-icon">Майстри</div>
+      <p>Одним із найвидатніших представників українського анімаційного мистецтва є <strong>Давид Черкаський</strong> — режисер легендарного мультфільму «Пригоди капітана Врунгеля». Його роботи відзначаються неповторним гумором, точними характерами персонажів та глибоким філософським підтекстом.</p>
+    </div>
+
+    <div class="text-block" style="transition-delay:0.3s">
+      <div class="text-block-icon">Традиції</div>
+      <p>Українські аніматори активно застосовували <strong>народні мотиви, казкові образи та етнічні орнаменти</strong> у своїх роботах. Мультфільми серії «Як козаки...» стали культовими для кількох поколінь глядачів і досі залишаються символом доброго гумору та народної мудрості.</p>
+    </div>
+
+    <div class="text-block" style="transition-delay:0.45s">
+      <div class="text-block-icon">Сучасність</div>
+      <p>Сьогодні українська анімація переживає справжнє <strong>відродження</strong>. Молоді режисери та аніматори створюють твори, що отримують визнання на міжнародних фестивалях. Вони поєднують традиції класичної школи з новітніми цифровими технологіями, зберігаючи самобутній національний характер.</p>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="stripe" style="opacity:0.4"></div>
+
+<!-- AUDIO -->
+<div style="background:var(--paper)">
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title-wrap">
+      <h2>Аудіо</h2>
+      <p>Звукове оформлення анімаційних фільмів</p>
+    </div>
+  </div>
+  <div class="section-rule"></div>
+
+  <div class="media-player" id="audioPlayer">
+    <div class="media-player-header">
+      <div class="media-dot" style="background:#e74c3c"></div>
+      <div class="media-dot" style="background:#f39c12"></div>
+      <div class="media-dot" style="background:#27ae60"></div>
+      <span>audio player — мультиплікатори.mp3</span>
+    </div>
+    <div class="media-player-body">
+      <audio controls>
+        <source src="audio.mp3" type="audio/mpeg">
+        <!-- Демо-аудіо для прикладу -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Ваш браузер не підтримує аудіо.
+      </audio>
+      <p class="media-note">
+        ✦ Замініть <code>src="audio.mp3"</code> на шлях до вашого аудіофайлу та покладіть його в одну папку з цим HTML файлом.
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- VIDEO -->
+<div class="text-section">
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title-wrap">
+      <h2>Відео</h2>
+      <p>Фрагменти анімаційних творів</p>
+    </div>
+  </div>
+  <div class="section-rule"></div>
+
+  <div class="media-player" id="videoPlayer">
+    <div class="media-player-header">
+      <div class="media-dot" style="background:#e74c3c"></div>
+      <div class="media-dot" style="background:#f39c12"></div>
+      <div class="media-dot" style="background:#27ae60"></div>
+      <span>video player — мультиплікатори.mp4</span>
+    </div>
+    <div class="media-player-body">
+      <video controls poster="">
+        <source src="video.mp4" type="video/mp4">
+        <!-- Демо-відео для прикладу -->
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Ваш браузер не підтримує відео.
+      </video>
+      <p class="media-note">
+        ✦ Замініть <code>src="video.mp4"</code> на шлях до вашого відеофайлу та покладіть його в одну папку з цим HTML файлом.
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <h3>Практична робота №3</h3>
+  <p>Веб-сторінка про українських мультиплікаторів</p>
+  <p style="margin-top:1rem">
+    Надіслати на: <a href="mailto:testbox_19@ukr.net">testbox_19@ukr.net</a>
+  </p>
+  <p style="margin-top:0.5rem;font-size:0.9rem;color:rgba(255,255,255,0.4)">
+    Вказати клас, прізвище та ім'я
+  </p>
+  <div class="footer-meta">© 2026 · Українська анімація</div>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.gallery-card, .text-block, .media-player').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Also trigger for elements already in view
+  setTimeout(() => {
+    document.querySelectorAll('.gallery-card, .text-block, .media-player').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('revealed');
+      }
+    });
+  }, 100);
+</script>
+</body>
+</html>
