@@ -18,7 +18,6 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -28,7 +27,6 @@
     overflow-x: hidden;
   }
 
-  /* ---- GRAIN OVERLAY ---- */
   body::before {
     content: '';
     position: fixed;
@@ -48,23 +46,13 @@
     justify-content: center;
     position: relative;
     padding: 4rem 2rem;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,151,58,0.12) 0%, transparent 70%),
-      var(--paper);
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,151,58,0.12) 0%, transparent 70%), var(--paper);
     text-align: center;
     overflow: hidden;
   }
 
-  .hero-ornament {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-  }
-
-  .hero-ornament svg {
-    width: 100%; height: 100%;
-    position: absolute; top: 0; left: 0;
-  }
+  .hero-ornament { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+  .hero-ornament svg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
 
   .hero-tag {
     font-family: 'Cormorant Garamond', serif;
@@ -92,10 +80,7 @@
     animation: fadeUp 1s ease 0.4s forwards;
   }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--terracotta);
-  }
+  .hero h1 em { font-style: italic; color: var(--terracotta); }
 
   .hero-subtitle {
     font-size: clamp(1rem, 2vw, 1.4rem);
@@ -116,18 +101,8 @@
     animation: fadeUp 1s ease 0.8s forwards;
   }
 
-  .hero-divider span {
-    display: block;
-    width: 80px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .hero-divider svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--gold);
-  }
+  .hero-divider span { display: block; width: 80px; height: 1px; background: var(--gold); }
+  .hero-divider svg { width: 20px; height: 20px; fill: var(--gold); }
 
   .scroll-hint {
     position: absolute;
@@ -202,7 +177,7 @@
     margin-bottom: 3rem;
   }
 
-  /* ---- GALLERY ---- */
+  /* ---- GALLERY (секція 01) ---- */
   .gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -210,7 +185,7 @@
   }
 
   @media (min-width: 700px) {
-    .gallery { grid-template-columns: repeat(4, 1fr); }
+    .gallery { grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
   }
 
   .gallery-card {
@@ -225,63 +200,11 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .gallery-card.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .gallery-card.revealed { opacity: 1; transform: translateY(0); }
 
   .gallery-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 40px var(--shadow);
-  }
-
-  .gallery-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease, filter 0.6s ease;
-    filter: sepia(30%) contrast(1.05);
-  }
-
-  .gallery-card:hover img {
-    transform: scale(1.07);
-    filter: sepia(0%) contrast(1.1);
-  }
-
-  .gallery-overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(26,16,8,0.9) 0%, transparent 60%);
-    padding: 1.5rem 1rem 1rem;
-    transform: translateY(100%);
-    transition: transform 0.4s ease;
-  }
-
-  .gallery-card:hover .gallery-overlay {
-    transform: translateY(0);
-  }
-
-  .gallery-overlay .name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--gold-light);
-  }
-
-  .gallery-overlay .role {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 0.05em;
-    margin-top: 0.2rem;
-  }
-
-  .gallery-frame-top {
-    position: absolute;
-    top: 8px; left: 8px; right: 8px;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    opacity: 0.6;
-    z-index: 2;
   }
 
   .gallery-card > img {
@@ -298,14 +221,32 @@
     filter: sepia(0%) contrast(1.1);
   }
 
-  .photo-fallback {
+  .photo-fallback { position: absolute; inset: 0; }
+
+  .gallery-frame-top {
     position: absolute;
-    inset: 0;
+    top: 8px; left: 8px; right: 8px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.6;
+    z-index: 2;
   }
 
-  /* ---- ANIMATED TEXT ---- */
-  .text-section { background: var(--cream); }
+  .gallery-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(26,16,8,0.9) 0%, transparent 60%);
+    padding: 1.5rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
 
+  .gallery-card:hover .gallery-overlay { transform: translateY(0); }
+  .gallery-overlay .name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--gold-light); }
+  .gallery-overlay .role { font-size: 0.75rem; color: rgba(255,255,255,0.6); letter-spacing: 0.05em; margin-top: 0.2rem; }
+
+  /* ---- TEXT BLOCKS ---- */
+  .text-section { background: var(--cream); }
   .text-blocks { display: grid; gap: 2rem; }
 
   .text-block {
@@ -319,10 +260,7 @@
     box-shadow: 4px 4px 0 rgba(201,151,58,0.12);
   }
 
-  .text-block.revealed {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  .text-block.revealed { opacity: 1; transform: translateX(0); }
 
   .text-block-icon {
     position: absolute;
@@ -337,24 +275,10 @@
     border-radius: 2px;
   }
 
-  .text-block p {
-    font-size: 1.15rem;
-    font-weight: 300;
-    line-height: 1.85;
-    color: #3a2d20;
-  }
+  .text-block p { font-size: 1.15rem; font-weight: 300; line-height: 1.85; color: #3a2d20; }
+  .text-block p strong { font-weight: 500; color: var(--terracotta); }
 
-  .text-block p strong {
-    font-weight: 500;
-    color: var(--terracotta);
-  }
-
-  /* ---- MEDIA SECTION ---- */
-  .media-grid {
-    display: grid;
-    gap: 2rem;
-  }
-
+  /* ---- MEDIA ---- */
   .media-player {
     background: white;
     border-radius: 6px;
@@ -365,10 +289,7 @@
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  .media-player.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .media-player.revealed { opacity: 1; transform: translateY(0); }
 
   .media-player-header {
     padding: 1rem 1.5rem;
@@ -378,10 +299,7 @@
     gap: 0.75rem;
   }
 
-  .media-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-  }
+  .media-dot { width: 8px; height: 8px; border-radius: 50%; }
 
   .media-player-header span {
     font-size: 0.8rem;
@@ -393,25 +311,65 @@
   }
 
   .media-player-body { padding: 1.5rem; }
+  .media-player-body audio, .media-player-body video { width: 100%; border-radius: 4px; display: block; }
+  .media-player-body video { background: #000; max-height: 340px; }
 
-  .media-player-body audio,
-  .media-player-body video {
+  /* ---- DOWNLOAD SECTION (05) ---- */
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 700px) {
+    .download-grid { grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  }
+
+  .img-download-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .img-download-card img {
     width: 100%;
-    border-radius: 4px;
+    height: 260px;
+    object-fit: cover;
+    object-position: 50% 15%;
     display: block;
   }
 
-  .media-player-body video {
-    background: #000;
-    max-height: 340px;
+  .download-info {
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
   }
 
-  .media-note {
-    margin-top: 0.75rem;
+  .download-info span {
+    font-family: 'Playfair Display', serif;
     font-size: 0.85rem;
-    color: #8a7060;
-    font-style: italic;
+    font-weight: 600;
+    color: var(--ink);
   }
+
+  .download-info a {
+    background: var(--gold);
+    color: white;
+    padding: 0.35rem 0.9rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .download-info a:hover { background: var(--terracotta); }
 
   /* ---- FOOTER ---- */
   footer {
@@ -420,7 +378,6 @@
     text-align: center;
     padding: 3rem 2rem;
     position: relative;
-    overflow: hidden;
   }
 
   footer::before {
@@ -431,42 +388,12 @@
     margin-bottom: 2rem;
   }
 
-  footer h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--gold-light);
-    margin-bottom: 0.5rem;
-  }
-
-  footer a {
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(201,151,58,0.4);
-    transition: border-color 0.2s;
-  }
-
+  footer h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold-light); margin-bottom: 0.5rem; }
+  footer a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,151,58,0.4); }
   footer a:hover { border-color: var(--gold); }
+  .footer-meta { margin-top: 2rem; font-size: 0.75rem; opacity: 0.4; letter-spacing: 0.1em; text-transform: uppercase; }
 
-  footer .footer-meta {
-    margin-top: 2rem;
-    font-size: 0.75rem;
-    opacity: 0.4;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  /* ---- ANIMATIONS ---- */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* ---- DECORATIVE STRIPE ---- */
+  /* ---- STRIPE ---- */
   .stripe {
     height: 6px;
     background: repeating-linear-gradient(
@@ -476,6 +403,16 @@
       var(--sage) 80px, var(--sage) 120px,
       var(--paper) 120px, var(--paper) 160px
     );
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 </style>
 </head>
@@ -491,17 +428,14 @@
       <line x1="720" y1="0" x2="720" y2="800" stroke="#c9973a" stroke-width="0.3" opacity="0.15"/>
     </svg>
   </div>
-
   <div class="hero-tag">Мистецтво анімації</div>
   <h1>Українські<br><em>Мультиплікатори</em></h1>
   <p class="hero-subtitle">Видатні митці, що подарували нам цілий всесвіт казок, пригод та незабутніх образів</p>
-
   <div class="hero-divider">
     <span></span>
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
     <span></span>
   </div>
-
   <div class="scroll-hint">
     <div class="scroll-arrow"></div>
     прокрути
@@ -510,8 +444,8 @@
 
 <div class="stripe"></div>
 
-<!-- GALLERY -->
-<div class="text-section" style="background: var(--paper)">
+<!-- 01 GALLERY -->
+<div style="background:var(--paper)">
 <div class="section">
   <div class="section-header">
     <div class="section-num">01</div>
@@ -521,20 +455,13 @@
     </div>
   </div>
   <div class="section-rule"></div>
-
   <div class="gallery" id="gallery">
 
-    <!-- Card 1: Давид Черкаський -->
     <div class="gallery-card" style="transition-delay:0s">
       <div class="gallery-frame-top"></div>
-      <img
-        src="cherkaskyi.png"
-        alt="Давид Черкаський"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-      >
+      <img src="cherkaskyi.png" alt="Давид Черкаський" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
       <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#3a2010,#7a5020);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
         <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#c9973a" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#c9973a" opacity="0.4"/></svg>
-        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>cherkaskyi.jpg</span>
       </div>
       <div class="gallery-overlay">
         <div class="name">Давид Черкаський</div>
@@ -542,17 +469,11 @@
       </div>
     </div>
 
-    <!-- Card 2: Іпполіт Лазарчук -->
     <div class="gallery-card" style="transition-delay:0.1s">
       <div class="gallery-frame-top"></div>
-      <img
-        src="lazarchuk.png"
-        alt="Іпполіт Лазарчук"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-      >
+      <img src="lazarchuk.png" alt="Іпполіт Лазарчук" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
       <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#0a2010,#1a5030);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
         <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#5a7a5e" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#5a7a5e" opacity="0.4"/></svg>
-        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>lazarchuk.jpg</span>
       </div>
       <div class="gallery-overlay">
         <div class="name">Іпполіт Лазарчук</div>
@@ -560,17 +481,11 @@
       </div>
     </div>
 
-    <!-- Card 3: Євген Сивокінь -->
     <div class="gallery-card" style="transition-delay:0.2s">
       <div class="gallery-frame-top"></div>
-      <img
-        src="syvokin.png"
-        alt="Євген Сивокінь"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-      >
+      <img src="syvokin.png" alt="Євген Сивокінь" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
       <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#2a0a05,#6a2015);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
         <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#b8522a" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#b8522a" opacity="0.4"/></svg>
-        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>syvokin.jpg</span>
       </div>
       <div class="gallery-overlay">
         <div class="name">Євген Сивокінь</div>
@@ -578,17 +493,11 @@
       </div>
     </div>
 
-    <!-- Card 4: Володимир Дахно -->
     <div class="gallery-card" style="transition-delay:0.3s">
       <div class="gallery-frame-top"></div>
-      <img
-        src="dakhno.png"
-        alt="Володимир Дахно"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-      >
+      <img src="dakhno.png" alt="Володимир Дахно" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
       <div class="photo-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#0a0a20,#202060);align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
         <svg width="56" height="70" viewBox="0 0 56 70" fill="none"><ellipse cx="28" cy="22" rx="14" ry="16" fill="#7070c0" opacity="0.7"/><path d="M4 66c0-13.25 10.75-24 24-24s24 10.75 24 24" fill="#7070c0" opacity="0.4"/></svg>
-        <span style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:0.12em;text-align:center;padding:0 0.5rem;">Додайте фото:<br>dakhno.jpg</span>
       </div>
       <div class="gallery-overlay">
         <div class="name">Володимир Дахно</div>
@@ -602,7 +511,7 @@
 
 <div class="stripe" style="opacity:0.4"></div>
 
-<!-- TEXT / ANIMATED PARAGRAPHS -->
+<!-- 02 TEXT -->
 <div class="text-section">
 <div class="section">
   <div class="section-header">
@@ -613,7 +522,6 @@
     </div>
   </div>
   <div class="section-rule"></div>
-
   <div class="text-blocks" id="textBlocks">
 
     <div class="text-block" style="transition-delay:0s">
@@ -642,7 +550,7 @@
 
 <div class="stripe" style="opacity:0.4"></div>
 
-<!-- AUDIO -->
+<!-- 03 AUDIO -->
 <div style="background:var(--paper)">
 <div class="section">
   <div class="section-header">
@@ -653,7 +561,6 @@
     </div>
   </div>
   <div class="section-rule"></div>
-
   <div class="media-player" id="audioPlayer">
     <div class="media-player-header">
       <div class="media-dot" style="background:#e74c3c"></div>
@@ -664,19 +571,15 @@
     <div class="media-player-body">
       <audio controls>
         <source src="audio.mp3" type="audio/mpeg">
-        <!-- Демо-аудіо для прикладу -->
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         Ваш браузер не підтримує аудіо.
       </audio>
-      <p class="media-note">
-        ✦ Замініть <code>src="audio.mp3"</code> на шлях до вашого аудіофайлу та покладіть його в одну папку з цим HTML файлом.
-      </p>
     </div>
   </div>
 </div>
 </div>
 
-<!-- VIDEO -->
+<!-- 04 VIDEO -->
 <div class="text-section">
 <div class="section">
   <div class="section-header">
@@ -687,7 +590,6 @@
     </div>
   </div>
   <div class="section-rule"></div>
-
   <div class="media-player" id="videoPlayer">
     <div class="media-player-header">
       <div class="media-dot" style="background:#e74c3c"></div>
@@ -696,16 +598,63 @@
       <span>video player — мультиплікатори.mp4</span>
     </div>
     <div class="media-player-body">
-      <video controls poster="">
+      <video controls>
         <source src="video.mp4" type="video/mp4">
-        <!-- Демо-відео для прикладу -->
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
         Ваш браузер не підтримує відео.
       </video>
-      <p class="media-note">
-        ✦ Замініть <code>src="video.mp4"</code> на шлях до вашого відеофайлу та покладіть його в одну папку з цим HTML файлом.
-      </p>
     </div>
+  </div>
+</div>
+</div>
+
+<div class="stripe" style="opacity:0.4"></div>
+
+<!-- 05 DOWNLOAD PHOTOS -->
+<div style="background:var(--paper)">
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title-wrap">
+      <h2>Завантажити фото</h2>
+      <p>Фотографії українських мультиплікаторів</p>
+    </div>
+  </div>
+  <div class="section-rule"></div>
+  <div class="download-grid">
+
+    <div class="img-download-card">
+      <img src="cherkaskyi.png" alt="Давид Черкаський">
+      <div class="download-info">
+        <span>Давид Черкаський</span>
+        <a href="cherkaskyi.png" download>⬇ Скачати</a>
+      </div>
+    </div>
+
+    <div class="img-download-card">
+      <img src="lazarchuk.png" alt="Іпполіт Лазарчук">
+      <div class="download-info">
+        <span>Іпполіт Лазарчук</span>
+        <a href="lazarchuk.png" download>⬇ Скачати</a>
+      </div>
+    </div>
+
+    <div class="img-download-card">
+      <img src="syvokin.png" alt="Євген Сивокінь">
+      <div class="download-info">
+        <span>Євген Сивокінь</span>
+        <a href="syvokin.png" download>⬇ Скачати</a>
+      </div>
+    </div>
+
+    <div class="img-download-card">
+      <img src="dakhno.png" alt="Володимир Дахно">
+      <div class="download-info">
+        <span>Володимир Дахно</span>
+        <a href="dakhno.png" download>⬇ Скачати</a>
+      </div>
+    </div>
+
   </div>
 </div>
 </div>
@@ -724,7 +673,6 @@
 </footer>
 
 <script>
-  // Intersection Observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -738,13 +686,10 @@
     observer.observe(el);
   });
 
-  // Also trigger for elements already in view
   setTimeout(() => {
     document.querySelectorAll('.gallery-card, .text-block, .media-player').forEach(el => {
       const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        el.classList.add('revealed');
-      }
+      if (rect.top < window.innerHeight) el.classList.add('revealed');
     });
   }, 100);
 </script>
